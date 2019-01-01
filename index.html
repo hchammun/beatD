@@ -1,0 +1,2708 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Mobile app</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1" charset="utf-8">
+
+	<link rel="stylesheet" type="text/css" href="css/jquery.mobile-1.4.5.min.css">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<link rel="stylesheet" type="text/css" href="css/leaflet.css">
+   
+	<script src="js/jquery.js"></script>
+	<script src="js/jquery.mobile-1.4.5.min.js"></script>
+	<script src="js/myjsfile.js"></script>
+	<script src="js/glucose.js"></script>
+	<script src="js/video.js"></script>
+	<script src="js/quiz.js"></script>
+	<script src="js/leaflet.js"></script>
+
+
+<!--
+
+	<script type="text/javascript">
+		if(navigator.geolocation==undefined){
+			alert("Geolocation undefined");
+		}else{
+			//alert("Geolocation Available");
+			navigator.geolocation.getCurrentPosition(userLocated, locationError);
+			function userLocated(position){
+				var latitude = position.coords.latitude;
+				var longitude = position.coords.longitude;
+
+
+			//	alert("Lat:"+latitude+",Long:"+longitude);
+
+
+						var mymap = L.map('mapid').setView([latitude, longitude], 13);
+L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', { maxZoom: 18, attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
+'<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' + 'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+id: 'mapbox.streets'
+		}).addTo(mymap);
+
+
+L.marker([latitude, longitude]).addTo(mymap)
+    .bindPopup("You're here.")
+     .openPopup();
+
+			}
+			function locationError(error){
+				switch(error.code){
+					case error.PERMISSION_DENIED:
+					alert("Permission Denied-" + error.message);
+					break;
+					
+					case error.POSITION_UNAVAILABLE:
+					alert("Position Not Available-" + error.message);
+					break;
+
+					case error.TIMEOUT:
+					alert("Request Time Out-" + error.message);
+					break;
+				}
+			}//end the function
+		}//end else block
+
+	</script>
+	
+-->
+
+</head>
+<body>
+
+
+
+
+<!-- Home page-->
+
+	<div data-role="page" id="home" >
+
+	
+<!-- header -->
+	<div data-role="header" id="MainPageheader" data-position="fixed" data-tap-toggle="false" data-fullscreen="false" data-theme="b" style="height: 70px;">
+			<img src="images/ab.png" style="padding-top: 22px; padding-left: 15px;" width="180" height="32">
+		<a href="#option" data-icon="arrow-l" class="ui-btn-right" style="margin-top: 15px;"><span> More</span></a>
+	</div>
+
+<!-- close header -->
+
+<!-- panel -->
+	<div data-role="panel" id="option" data-display="overlay" data-position="right">
+	
+		<div data-role="controlgroup">
+			
+			<a href="#login" data-role="button" data-icon="user" data-theme="b">My Storage</a>
+			<a href="#signup" data-role="button" data-icon="grid" data-theme="b">Location</a>
+
+		</div>
+
+		<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+
+		<button data-rel="close" data-icon="delete" data-theme="b">Close</button>
+	
+	</div>
+
+<!-- close panel -->
+
+
+
+<!-- My dropdown -->
+    <div data-role="popup" id="mainnavpanel" data-theme="b" data-arrow="t">
+        <ul data-role="listview">
+
+            <li>
+            	<a href="#glucose" class="ui-btn" data-transition="none">Glucose range level</a>
+            </li>
+
+            <li>
+            	<a href="#bmi" class="ui-btn" data-transition="none">Bmi Calculator</a>
+            </li>
+
+            <li>
+            	<a href="#mealplan" class="ui-btn" data-transition="none">Diabetic Meal plan</a>
+            </li>
+
+            <li>
+            	<a href="#exercise" class="ui-btn" data-icon="recycle" data-transition="none">Exercise plan</a>
+            </li>
+
+            <li>
+            	<a href="#quiz" class="ui-btn" data-icon="edit" data-transition="none">Quiz</a>
+            </li>
+
+            <li>
+            	<a href="#aboutus" class="ui-btn" data-icon="check" data-transition="none">About us</a>
+            </li>
+
+
+        </ul>
+    </div>
+
+<!-- close dropdown -->
+
+
+
+<!-- navbar class="ui-btn-active ui-state-persist" -->
+
+	<div data-role="navbar"  data-iconpos="left">
+		<ul>
+			<li><a href="#home"  data-icon="home" class="ui-btn-active ui-state-persist" data-theme="b">Home</a></li>
+			<li><a href="#info" data-icon="plus" data-theme="b">Info</a></li>
+			<li><a href="#mainnavpanel" data-icon="carat-d" data-rel="popup" data-theme="b">Services</a></li>
+	<!--	<li><a href="#" data-icon="edit" data-theme="b">Quiz</a></li> -->
+ 		</ul>
+	</div>
+
+<!-- close navbar -->
+
+
+<!-- main -->
+		<div data-role="main" class="ui-content" data-theme="b">
+	
+	<br>
+	<img src="images/diabetes2.jpg" width="100%" style="margin-right: 0px;margin-left: 0px;">
+	
+	<p class="myLineHeight">Our main <span class="imp-text">aim</span> is to sensitise Mauritians about the disease of Diabetes, as recent studies carried out by the Ministry of Health, has shown that nearly <span class="imp-text">25%</span> of Mauritians suffer from Diabetes.</p>
+
+	<p  class="myLineHeight">And percentage is expected to rise in the upcoming years. The application is <span class="imp-text">addressed</span> to both Non-Diabetic &amp; Diabetic people.</p>
+	<br>
+
+
+
+
+
+	
+
+	<a href="#info" data-role="button" data-theme="b" data-transistion="slide" data-icon="carat-r">More info</a>
+
+
+	<br><br>
+
+	<img src="images/diabetes3.jpg" width="100%" style="margin-right: 0px;margin-left: 0px;">
+
+	<br>
+	<p  class="myLineHeight">So you have just done your blood <span class="imp-text1">Glucose test?</span> And you're wondering if the glucose value is in the normal range...
+	Calculate the normal Non-Diabetic range, Adult diabetic or Children diabetic normal range on the app itself.</p>
+	
+	<br>
+	
+
+
+
+	<a href="#glucose" data-role="button" data-theme="b" data-transistion="slide" data-icon="carat-r">Normal Sugar Ranges</a>
+
+	<br><br>
+	<img src="images/glucometer.jpg" width="100%" style="margin-right: 0px;margin-left: 0px;">
+
+
+	<p class="myLineHeight">Keep your <span class="imp-text">records</span> of your current Glucose level on the app itself, so you can monitor the changes each time you test....</p>
+
+
+
+
+
+
+	<br>
+
+	<a href="#login" data-role="button" data-theme="b" data-transistion="slide" data-icon="carat-r">Record my Test</a>
+	
+	<br><br>
+
+	<img src="images/bmical.jpg" width="100%" style="margin-right: 0px;margin-left: 0px;">
+
+
+	<p class="myLineHeight">Did you know that <span class="imp-text2">Obesity and type 2</span> are closely related? Having a higher amount of body fat increases your chances of developing diabetes. </p>
+
+	<p class="myLineHeight">And, if you have diabetes, extra weight means you're at higher risk for complications...</p>
+
+
+	<br>
+	<a href="#bmi" data-role="button" data-theme="b" data-transistion="slide" data-icon="carat-r">BMI calculator</a>
+
+	<br><br>
+
+
+	<img src="images/mealplan.jpg" width="100%" style="margin-right: 0px;margin-left: 0px;">
+
+
+	<br><br>
+
+	<p class="myLineHeight"> Follow our <span class="imp-text3">Diabetic Meal Plan</span> where you can reference yourself on your meals, and have some ideas about healthy foods you can consume more frequently.</p>
+
+	<br>
+
+	<a href="#mealplan" data-role="button" data-theme="b" data-transistion="slide" data-icon="carat-r">Daily Meals ideas</a>
+
+
+	<br><br>
+
+	<img src="images/running.jpg" width="100%" style="margin-right: 0px;margin-left: 0px;">
+	
+	<br><br>
+
+	<p class="myLineHeight">Exercises not only helps to burn excess calories, daily exercise is essential for health, helps against diseases, but also changes your mindset. So, at least 30mins or yoga, workout, jogging or even walking is strongly adviced for everone...</p>
+
+	<br>
+	<a href="#exercise" data-role="button" data-theme="b" data-transistion="slide" data-icon="carat-r">Exercise videos</a>
+
+
+	<br><br>
+
+	<img src="images/quiz.jpg" width="100%" style="margin-right: 0px;margin-left: 0px;"><br>
+	<br>
+	<p class="myLineHeight">Learn more in a fun way by trying out our <span class="imp-text4">quiz</span>!</p>
+
+	<br>
+
+	<a href="#quiz" data-role="button" data-theme="b" data-transistion="slide" data-icon="carat-r">Start quiz</a>
+
+
+
+
+		</div>
+
+<!--close div main -->
+		
+
+	<!--	<a href="#pagetwo" data-transition="fade"  class="ui-btn">Page two</a> -->
+
+
+<!-- footer -->
+	<div data-role="footer" data-position="fixed" style="background-color: black;">
+		<p style="font-family: Times; text-align: center;margin: 8px;">&copy; Copyright | Beat Diabetes</p>
+	</div>
+<!-- close footer -->
+
+
+</div> <!-- close homepage -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Info page-->
+
+	<div data-role="page" id="info" >
+
+	
+<!-- header -->
+	<div data-role="header" id="MainPageheader1" data-position="fixed" data-tap-toggle="false" data-fullscreen="false" data-theme="b" style="height: 70px;">
+			<img src="images/ab.png" style="padding-top: 22px; padding-left: 15px;" width="180" height="32">
+		<a href="#option1" data-icon="arrow-l" class="ui-btn-right" style="margin-top: 15px;"><span> More</span></a>
+	</div>
+
+<!-- close header -->
+
+<!-- panel -->
+	<div data-role="panel" id="option1" data-display="overlay" data-position="right">
+	
+		<div data-role="controlgroup">
+			<a href="#login" data-role="button" data-icon="user" data-theme="b">My Storage</a>
+			<a href="#signup" data-role="button" data-icon="grid" data-theme="b">Location</a>
+		</div>
+
+		<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+
+		
+			<button data-rel="close" data-icon="delete" data-theme="b">Close</button>
+	
+	</div>
+
+<!-- close panel -->
+
+
+
+<!-- My dropdown -->
+    <div data-role="popup" id="mainnavpanel1" data-theme="b" data-arrow="t">
+        <ul data-role="listview">
+
+            <li>
+            	<a href="#glucose" class="ui-btn" data-transition="none">Glucose range level</a>
+            </li>
+
+            <li>
+            	<a href="#bmi" class="ui-btn" data-transition="none">Bmi Calculator</a>
+            </li>
+
+            <li>
+            	<a href="#mealplan" class="ui-btn" data-transition="none">Diabetic Meal plan</a>
+            </li>
+
+            <li>
+            	<a href="#exercise" class="ui-btn" data-icon="recycle" data-transition="none">Exercise plan</a>
+            </li>
+
+            <li>
+            	<a href="#quiz" class="ui-btn" data-icon="edit" data-transition="none">Quiz</a>
+            </li>
+
+            <li>
+            	<a href="#aboutus" class="ui-btn" data-icon="check" data-transition="none">About us</a>
+            </li>
+
+
+        </ul>
+    </div>
+
+<!-- close dropdown -->
+
+
+
+<!-- navbar -->
+
+	<div data-role="navbar"  data-iconpos="left">
+		<ul>
+			<li><a href="#home" data-icon="home"  data-theme="b">Home</a></li>
+			<li><a href="#info" class="ui-btn-active ui-state-persist" data-icon="plus" data-theme="b" >Info</a></li>
+			<li><a href="#mainnavpanel1" data-icon="carat-d" data-rel="popup" data-theme="b">Services</a></li>
+	<!--	<li><a href="#" data-icon="edit" data-theme="b">Quiz</a></li> -->
+ 		</ul>
+	</div>
+
+<!-- close navbar -->
+
+
+<!-- main -->
+		<div data-role="main" class="ui-content" data-theme="b">
+		
+	
+
+
+			
+
+<!-- awareness contents -->
+
+			<div>
+				<p class="title2">Awareness contents</p>
+
+				<div data-role="collapsible-set">
+					<ul data-role="listview" data-dividers="true" data-filter="true" data-filter-placeholder="Search Keywords...."  data-shadow="false" data-theme="c">
+<br>
+
+						<div data-role="collapsible" data-iconpos="right">
+							<h2>What is diabetes?</h2>
+							
+							<p class="pg_size">Diabetes is the condition in which the body does not properly process food for use as energy. Most of the food we eat is turned into glucose, or sugar, for our bodies to use for energy. The pancreas, an organ that lies near the stomach, makes a hormone called insulin to help glucose get into the cells of our bodies. When you have diabetes, your body either does not make enough insulin or cannot use its own insulin as well as it should. This causes sugars to build up in your blood.</p><br>
+
+
+
+
+						</div> 
+
+
+
+						<div data-role="collapsible" data-iconpos="right">
+							<h2>Types of Diabetes</h2><br>
+
+							
+
+							<b>Type 1 Diabetes</b>
+								<p>The body does not produce insulin. Some people may refer to this type as insulin-dependent diabetes, juvenile diabetes, or early-onset diabetes. People usually develop type 1 diabetes before their 40th year, often in early adulthood or teenage years. Approximately 10% of all diabetes cases are type 1. Patients with type 1 diabetes will need to take insulin injections for the rest of their life. They must also ensure proper blood-glucose levels by carrying out regular blood tests and following a special diet.</p>
+
+								<b>Type  2 Diabetes</b>
+								<p>The body does not produce enough insulin for proper function, or the cells in the body do not react to insulin (insulin resistance). Approximately 90% of all cases of diabetes worldwide are type 2. Some people may be able to control their type 2 diabetes symptoms by losing weight, following a healthy diet, doing plenty of exercise, and monitoring their blood glucose levels. However, type 2 diabetes is typically a progressive disease - it gradually gets worse - and the patient will probably end up have to take insulin, usually in tablet form.</p>
+
+
+						</div>
+						
+
+
+
+
+
+						<div data-role="collapsible" data-iconpos="right">
+							<h2>Causes of Diabetes</h2>
+
+							<b>The role of glucose</b>
+							<p class="pg_size">Sugar has a bad reputation, but there is one type of sugar, called glucose, that your body needs to function. Glucose is a monosaccharide or single sugar. When you eat a carbohydrate, like a piece of bread or bowl of cereal, your body breaks the food down into small molecules, including glucose, that your body can absorb. Glucose enters the bloodstream and travels to every part of the body to fulfill its essential purpose.</p><br>
+
+							<b>Causes of type 1 diabetes</b>
+							<p class="pg_size">The exact cause of type 1 diabetes is unknown. What is known is that your immune system, which normally fights harmful bacteria or viruses, attacks and destroys your insulin-producing cells in the pancreas. This leaves you with little or no insulin. Instead of being transported into your cells, sugar builds up in your bloodstream. Type 1 is thought to be caused by a combination of genetic susceptibility and environmental factors, though exactly what many of those factors are is still unclear.</p>
+							<p>The exact cause of type 1 diabetes is unknown. What is known is that your immune system, which normally fights harmful bacteria or viruses, attacks and destroys your insulin-producing cells in the pancreas. This leaves you with little or no insulin. Instead of being transported into your cells, sugar builds up in your bloodstream. Type 1 is thought to be caused by a combination of genetic susceptibility and environmental factors, though exactly what many of those factors are is still unclear.</p><br>
+
+							<b>Causes of type 2 diabetes</b>
+							<p>Insulin resistance: </p>
+							<p>Insulin resistance is the common cause of type 2 diabetes. Type 2 diabetes develops when the body loses its ability to use the insulin. Several factors can affect insulin resistance. Genetic susceptibility and lifestyle choices plays major role in insulin resistance.</p><br>
+
+							<p>Lack of insulin: </p>
+							<p>Type 2 diabetes also develops when the pancreas doesn’t produce enough insulin to manage sugar levels in blood. These two are the main causes of type 2 diabetes. The exact cause of insulin resistance and lack of insulin is unknown. Several factors can affect type 2 diabetes. There is no single cause of diabetes type 2.</p><br>
+
+							<p>Causes of gestational diabetes</p>
+							<p>During pregnancy, the placenta produces hormones to sustain your pregnancy. These hormones make your cells more resistant to insulin. Normally, your pancreas responds by producing enough extra insulin to overcome this resistance. But sometimes your pancreas can not keep up. When this happens, too little glucose gets into your cells and too much stays in your blood, resulting in gestational diabetes.</p><br>
+
+													
+						</div>
+
+
+						<div data-role="collapsible" data-iconpos="right">
+							<h2>Pre-Diabetes</h2>
+
+							<p>Prediabetes occurs when your body is not able to keep your sugar (glucose) at a normal level in your blood. Your blood sugar is higher than normal, but it is not high enough to be diabetes. The food you eat turns into sugar, which your body uses for energy. Normally, the pancreas makes insulin, which allows the sugar in blood to get into the body’s cells. But when your body can not use insulin the right way, the sugar does not move into cells. It stays in your blood instead. This is called insulin resistance.</p>
+
+						</div>
+
+						<div data-role="collapsible" data-iconpos="right">
+							<h2>Symptoms of diabetes</h2>
+
+							<p>Individuals can experience different signs and symptoms of diabetes, and sometimes there may be no signs. Some of the signs commonly experienced include:</p>
+							<p>You're taking more bathroom breaks
+							When you have diabetes, your body becomes less efficient at breaking food down into sugar, so you have more sugar sitting in your bloodstream, says Dobbins. Your body gets rid of it by flushing it out in the urine. That is why you are going to the bathroom a lot.</p>
+
+							<p>Urinating a lot will also make you feel parched. A common symptom Dobbins sees with patients is that they use drinks like juices, soda, or chocolate milk to quench their thirst. These sugary beverages then pack the bloodstream with excess sugar, which can lead to the problem all over again.</p><br>
+
+							<b>You've lost a little weight</b>
+							<p>Considering that being overweight is a risk factor for diabetes, it sounds counterintuitive that shedding pounds could be a sign of the disease. Weight loss comes from two things, One, from the water that you lose [from urinating]. Two, you lose some calories in the urine and you don’t absorb all the calories from the sugar in your blood.</p><br>
+
+							<b>You feel shaky and hungry</b>
+							<p>It is not uncommon for patients to suddenly feel unsteady and immediately need to reach for carbs. When you have high blood sugar, your body has a problem regulating its glucose. If you have eaten something high in carbohydrates, your body shoots out a little too much insulin, and your glucose drops quickly. This makes you feel shaky, and you tend to crave carbs or sugar. This can lead to a vicious cycle.</p><br>
+
+							<b>You're tired all the time</b>
+							<p>Of course you are exhausted every now and then. But ongoing fatigue is an important symptom to pay attention to. it might mean the food you are eating for energy is not being broken down and used by cells as it is supposed to.</p><br>
+
+							<b>You're moody and grumpy</b>
+							<p>When your blood sugar is out of whack, you just do not feel well, and might become more short-tempered. In fact, high blood sugar can mimic depression like symptoms.Symptoms of Diabetes</p><br>
+
+							<b>Your vision seems blurry</b>
+							<p>In the early stages of diabetes, the eye lens is not focusing well because glucose builds up in the eye, which temporarily changes its shape. In about six to eight weeks after your blood sugars are stabilized, you are not going to feel it anymore, the eye will adjust</p><br>
+
+							<b>Your cuts and scrapes heal more slowly</b>
+							<p>The immune system and the processes that help the body heal do not work so well when your sugar levels are high.</p><br>
+
+							<b>Your feet tingles </b>
+							<p>Elevated sugar levels can cause complications well before you realize you have diabetes. One of these is mild nerve damage, which can cause numbness in your feet.</p>
+
+
+						</div>
+
+						<div data-role="collapsible" data-iconpos="right">
+
+							<h2>Risk Factors</h2>
+
+							<p>Risk factors for diabetes depend on the type of diabetes.</p><br>
+							<b>Risk factors for type 1 Diabetes</b>
+							<p>Although the exact cause of type 1 diabetes is unknown, factors that may signal an increased risk include:</p>
+							<b>Environmental factors</b>
+							<p>Circumstances such as exposure to a viral illness likely play some role in type 1 diabetes.</p><br>
+
+							<b>Dietary factors</b>
+							<p>These include low vitamin D consumption, early exposure to cows milk, and exposure to cereals before 4 months of age. None of these factors has been shown to directly cause type 1 diabetes.</p><br>
+
+							<b>Sexual dysfunction</b>
+							<p>In men with diabetes, particularly those who smoke, nerve and blood vessel damage can lead to erection problems. This can usually be treated with medication. Women with diabetes may experience: a reduced sex drive (loss of libido), less pleasure from sex, vaginal dryness, less ability to orgasm, pain during sex.</p><br>
+
+							<b>Premature menopause:</b>
+							<p>The average age a woman goes through menopause is 51. Menopause before age 40 is considered premature and may be related to immune disorders such as Type 1 diabetes. Just as your body fights your pancreas when you have diabetes. The concern with premature menopause is increased risk of heart disease, osteoporosis and for some women, fertility.
+							Infection or illness
+							Some infections and illnesses, mostly rare ones, can damage your pancreas.
+							</p><br>
+
+							<b>Geography</b>
+							<p>The incidence of type 1 diabetes tends to increase as you travel away from the equator. People living in Finland and Sardinia have the highest incidence of type 1 diabetes, about two to three times higher than rates in the United States and 400 times the incidence among people living in Venezuela.</p><br>
+
+							<b>Genetics</b>
+							<p>The incidence of type 1 diabetes tends to increase as you travel away from the equator. People living in Finland and Sardinia have the highest incidence of type 1 diabetes, about two to three times higher than rates in the United States and 400 times the incidence among people living in Venezuela.
+							The presence of certain genes indicates an increased risk of developing type 1 diabetes.
+							</p><br><br>
+
+							<h3>Risk Factors for Type 2 Diabetes</h3>
+
+							<b>Age</b>
+							<p>Your risk increases as you get older. This may be because you tend to exercise less, lose muscle mass and gain weight as you age. But type 2 diabetes is also increasing dramatically among children, adolescents and younger adults.</p><br>
+
+							<b>Family history</b>
+							<p>Type 2 diabetes has a hereditary factor. If someone in your close family has (or had) it, you are more likely to develop it.</p><br>
+
+							<b>Weight</b>
+							<p>Type 2 diabetes has a hereditary factor. If someone in your close family has (or had) it, you are more likely to develop it.</p><br>
+
+							<b>Family history</b>
+							<p>The more fatty tissue you have, the more resistant your cells become to insulin.</p><br>
+
+							<b>Less Active</b>
+							<p>The less active you are, the greater your risk. Physical activity helps you control your weight, uses up glucose as energy and makes your cells more sensitive to insulin.</p><br>
+
+							<b>Race</b>
+							<p>Although it's unclear why, people of certain races including blacks, Hispanics, American Indians and Asian-Americans are at higher risk.</p><br>
+
+							<b>Gestational diabetes</b>
+							<p>If you developed gestational diabetes when you were pregnant, your risk of developing prediabetes and type 2 diabetes later increases. If you gave birth to a baby weighing more than 9 pounds (4 kilograms), you're also at risk of type 2 diabetes.</p><br>
+
+							<b>Polycystic ovary syndrome</b>
+							<p>If you developed gestational diabetes when you were pregnant, your risk of developing prediabetes and type 2 diabetes later increases. If you gave birth to a baby weighing more than 9 pounds (4 kilograms), you're also at risk of type 2 diabetes.
+							For women, having polycystic ovary syndrome a common condition characterized by irregular menstrual periods, excess hair growth and obesity increases the risk of diabetes.
+							</p><br>
+
+							<b>High blood pressure</b>
+							<p>Having blood pressure over 140/90 millimeters of mercury (mm Hg) is linked to an increased risk of type 2 diabetes.</p><br>
+
+							<b>Abnormal cholesterol and triglyceride levels</b>
+							<p>If you have low levels of high-density lipoprotein (HDL), or good, cholesterol, your risk of type 2 diabetes is higher. Triglycerides are another type of fat carried in the blood. People with high levels of triglycerides have an increased risk of type 2 diabetes. Your doctor can let you know what your cholesterol and triglyceride levels are.</p>
+
+
+
+							</div>
+
+
+
+
+
+							<div data-role="collapsible" data-iconpos="right">
+								<h2>Problems faced by Diabetics</h2>
+
+								<p>The longer you have diabetes and the less controlled your blood sugar, higher the risk of Problems. Eventually, diabetes problems may be disabling or even life-threatening. Possible problems include:</p><br>
+
+								<b>Cardiovascular Disease</b>
+								<p>Diabetes dramatically increases the risk of various cardiovascular problems, including coronary artery disease with chest pain (angina), heart attack, stroke and narrowing of arteries (atherosclerosis). If you have diabetes, you are more likely to have heart disease or stroke.</p>
+
+								<b>Nerve damage (neuropathy)</b>
+
+								<p>Excess sugar can injure the walls of the tiny blood vessels (capillaries) that nourish your nerves, especially in your legs. This can cause tingling, numbness, burning or pain that usually begins at the tips of the toes or fingers and gradually spreads upward. Left untreated, you could lose all sense of feeling in the affected limbs. Damage to the nerves related to digestion can cause problems with nausea, vomiting, diarrhea or constipation. For men, it may lead to erectile dysfunction.</p>
+
+								<b>Skin conditions</b>
+								<p>Diabetes may leave you more susceptible to skin problems, including bacterial and fungal infections.</p>
+
+								<b>Eyes Problems</b>
+								<p>It is recommended that people with diabetes see an eye doctor every year for a dilated eye exam. Eye problems that can occur with diabetes include: Cataracts — (a clouding of the lens of the eyes), Glaucoma — (increased pressure in the eye), Retinopathy — (eye changes with the retina in the back of the eye).</p>
+
+								<b>Kidneys</b>
+								<p>Have your urine checked for protein at least once a year. Protein in the urine is a sign of kidney disease. High blood pressure might also lead to kidney disease. Diabetes can damage the kidneys and may lead to kidney failure.</p>
+								<p>Have your urine checked for protein at least once a year. Protein in the urine is a sign of kidney disease. High blood pressure might also lead to kidney disease. Diabetes can damage the kidneys and may lead to kidney failure.</p>
+
+								<b>Heart and Brain</b>
+								<p>All people with diabetes have an increased chance for heart disease and strokes. Heart disease is the major cause of death in people with diabetes. It is important to control other risks such as high blood pressure and high fats (cholesterol), as well as blood sugar. And uncontrolled diabetes raises the risk of suffering from depression, anxiety and some other mental disorders.</p>
+
+								<b>Feet</b>
+								<p>High blood sugars can lead to poor blood flow and nerve damage. This can lead to slow healing of sores. You can experience severe pain, but you can also lose feeling in your feet. In serious cases, this may lead to amputation of your toes, foot, or leg.</p>
+
+
+								<b>Sexual dysfunction</b>
+								<p>In men with diabetes, particularly those who smoke, nerve and blood vessel damage can lead to erection problems. This can usually be treated with medication. Women with diabetes may experience:a reduced sex drive (loss of libido), less pleasure from sex, vaginal dryness, less ability to orgasm, pain during sex.</p>
+
+								<b>Premature menopause</b>
+								<p>The average age a woman goes through menopause is 51. Menopause before age 40 is considered premature and may be related to immune disorders such as Type 1 diabetes. Just as your body fights your pancreas when you have diabetes. The concern with premature menopause is increased risk of heart disease, osteoporosis and for some women, fertility.</p>
+
+
+
+
+							</div>
+
+
+
+
+							<div data-role="collapsible" data-iconpos="right">
+								
+								<h2>How to prevent Diabetes</h2>
+
+								<p>Here are some tips on how to alter your diet and lifestyle to avoid developing diabetes :</p><br>
+
+								<b>Increase your fiber</b>		
+								<p>Seek to include both soluble and insoluble fiber in your daily diet. Berries, nuts, vegetables and chia seeds are a great way to slip in the fiber daily. Aim to include 40 to 50 grams of fiber in your daily regimen for every 1,000 calories you eat. You may want to start tracking the foods you eat each day until you are a good judge of how much fiber and carbohydrates you are eating.
+
+								</p>
+
+								<b>Exercise Regularly</b>
+								<p>Moderate physical activity on most days of the week helps manage weight, reduce blood glucose levels and may also improve blood pressure and cholesterol.</p>
+
+
+								<b>Choose the right fats </b>
+
+								<p>Add some healthy fat in your diet. Fat slows down the digestive process, meaning blood sugar levels don’t spike as quickly. That doesn’t mean you should reach for the donuts, though.</p>
+
+								<b>Sleep well </b>
+								<p>Chronic sleep deprivation and poor quality sleep increase the risk for diabetes and obesity.</p>
+
+								<b>Control blood pressure </b>
+								<p>Most people can do this with regular exercise, a balanced diet and by keeping a healthy weight. In some cases, you might need medication prescribed by your doctor.</p>
+
+							</div>
+
+
+						
+
+
+							<div data-role="collapsible" data-iconpos="right">
+								
+								<h2>Things that increase diabetic risks</h2>
+
+								<b>Pre-diabetes</b>
+								<p>Impaired glucose tolerance or impaired fasting glucose, prediabetes is the number one risk factor leading to type 2 diabetes—and more than 86 million people have it. People with prediabetes have blood glucose levels above normal, but not high enough to be diagnosed as diabetes. The good news is you can delay or even prevent developing type 2 diabetes with moderate exercise and weight loss.</p>
+
+								<b>Skipping Breakfast</b>
+								<p>Forgetting your morning meal not only tends to backfire, making you ravenous by late morning, but can also create the perfect storm for type 2 diabetes. When you deprive your body of food, insulin levels are disrupted, making it harder to control blood sugar.</p>
+
+								<b>Low birth weight</b>
+								<p>Your baby might be able to predict your risk for diabetes later in life. Researchers think there’s a genetic link between low birth weight in newborns and the development of diabetes in their fathers. the genes in the father that predispose him to diabetes also cause low birth weight in his child, as those same genes are passed to his baby. Fathers of babies who fall into the lowest 20 percent of birth weights had a 180 percent increased risk of diabetes, even if they weren’t diabetic when the child was born. Babies with low birth weight also have a higher risk of developing the disease themselves if their fathers not mothers have diabetes.</p>
+
+								<b>Don't get enough sun exposure</b>
+								<p>It's important to protect yourself from the sun's harmful cancer-causing rays, but shunning sunlight entirely may put you at risk for diabetes. People with vitamin D deficiency are more likely to have type 2 diabetes and prediabetes, regardless of their weight. Researchers believe the sunshine vitamin plays a role in the proper functioning of your pancreas, which produces insulin and helps regulate blood sugar. So take a supplement to boost your levels, as well as eating foods rich in the vitamin, like salmon and vitamin D-fortified milk or cereal.
+
+								</p>
+
+								<b>Smoking</b>
+								<p>Smokers have up to a 40% higher chance of developing type 2 diabetes than non-smokers. And the more you smoke, the higher your risk. Smoking also makes controlling the disease—both type 1 and type 2 diabetes more difficult. Quitting smoking at any time will benefit your health immediately, but the sooner you quit, the better, both for controlling your blood glucose levels and for your overall well-being.</p>
+
+								<b>Pesticide</b>
+								<p>Possibly a new reason to go organic, pesticides have been linked to an increased risk for diabetes, particularly type 2. Many researches shows pesticides were associated with a more than 60% increased risk of developing diabetes. More research is still needed, but in the meantime, consider reducing your exposure to pesticides as much as possible.</p>
+
+								<b>Antibiotics</b>
+								<p>Taking numerous antibiotics has been linked to type 2 diabetes. People who filled two to four antibiotics prescriptions within the past 15 years had a 23 percent higher risk for diabetes. Those who received five or more courses of antibiotics had a 53 percent higher risk of developing the disease. Researchers interpret their findings in two ways: that antibiotics raise the risk of type 2 diabetes, or that people who eventually develop the disease are more prone to infections, leading them to need more antibiotics before they’re diagnosed.
+
+								</p>
+
+
+							</div>
+
+
+														<div data-role="collapsible" data-iconpos="right">
+								<h2>Healthy foods strongly adviced </h2>
+								<p>These foods can give you an extra edge against diabetes. And should be consumed more frequently.</p><br>
+
+								<b>Apple</b>
+								<p>Because they offer so many health advantages, put these at the core of your diet. Apples are naturally low in calories, yet their high fiber content (4 grams) fills you up, battles bad cholesterol, and blunts blood-sugar swings. Eat them whole and unpeeled for the greatest benefit, or make a quick ‘baked’ apple. After washing and chopping one apple, put it in a bowl with a dusting of cinnamon and microwave until soft (about 4 minutes). Enjoy with yoghurt and oat bran sprinkles for a nutritious dessert, or serve over oatmeal for breakfast.
+
+								</p>
+
+								<b>Avocado</b>
+								<p>Rich, creamy, and packed with beneficial monounsaturated fat, avocado slows digestion and helps keep blood sugar from spiking after a meal. A diet high in good fats may even help reverse insulin resistance, which translates to steadier blood sugar long-term.</p>
+
+								<b>Barley</b>
+								<p>Rich, creamy, and packed with beneficial monounsaturated fat, avocado slows digestion and helps keep blood sugar from spiking after a meal. A diet high in good fats may even help reverse insulin resistance, which translates to steadier blood sugar long-term</p>
+
+								<b>Beans</b>
+								<p>When menu planning, think ‘bean cuisine‘ at least twice a week. The soluble fiber in all types of beans (from chickpeas to kidney beans to even edamame) puts a lid on high blood sugar. And because they’re rich in protein, beans can stand in for meat in main dishes.</p>
+
+								<b>Beef</b>
+								<p>Beef is a diabetes-friendly food, as long as you choose the leanest cuts and keep portions to one-fourth your plate. Getting enough protein at mealtime keeps you feeling full and satisfied. Plus, it helps maintain muscle mass when you’re losing weight, so your metabolism stays high.</p>
+
+
+								<b>Berries</b>
+								<p>Berries are full of fibre and antioxidants. The red and blue varieties also contain natural plant compounds called anthocyanins. Scientists believe these may help lower blood sugar by boosting insulin production. Put some in an easy-to-grab location or freeze a handful to suck on or use as ice cubes.</p>
+
+								<b>Brocolli</b>
+								<p>Broccoli is filling, fibrous, and full of antioxidants (including a day’s worth of vitamin C in one serving). It’s also rich in chromium, which plays an important role in long-term blood sugar control.</p>
+
+
+								<b>Carrots</b>
+								<p>Don’t believe what you hear about carrots rapidly raising blood sugar. While the type of sugar they contain is transformed into blood sugar quickly, the amount of sugar in carrots is extremely low. That’s good news because carrots are one of nature’s richest sources of beta-carotene, which is linked to a lower risk of diabetes and better blood-sugar control.</p>
+
+								<b>Chicken or turkey</b>
+								<p>These meats can be high-fat disasters or perfectly healthy fare. It all depends on the cut and how it’s prepared. Breast meat, whether ground or whole, is always lower in fat than dark meat such as thighs and drumsticks. Never eat the skin because of its high saturated fat content, and when buying ground turkey, make sure the package says ground turkey breast.</p>
+
+								<b>Eggs</b>
+								<p>Eggs are another excellent, inexpensive source of high-quality protein’so high, in fact, that egg protein is the gold standard nutritionists use to rank all other proteins. An egg or two would not raise your cholesterol, and will keep you feeling full and satisfied for hours afterward</p>
+
+							</div>
+
+
+
+
+
+
+					</ul>
+
+				</div><!-- close cola -->
+
+			</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		</div>
+
+<!--close div main -->
+		
+
+	<!--	<a href="#pagetwo" data-transition="fade"  class="ui-btn">Page two</a> -->
+
+
+<!-- footer -->
+	<div data-role="footer" data-position="fixed" style="background-color: black;">
+		<p style="font-family: Times; text-align: center;margin: 8px;">&copy; Copyright | Beat Diabetes</p>
+	</div>
+<!-- close footer -->
+
+
+</div> <!-- close infopage -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Glucose page-->
+
+	<div data-role="page" id="glucose" >
+
+	
+<!-- header -->
+	<div data-role="header" id="MainPageheader2" data-position="fixed" data-tap-toggle="false" data-fullscreen="false" data-theme="b" style="height: 70px;">
+			<img src="images/ab.png" style="padding-top: 22px; padding-left: 15px;" width="180" height="32">
+		<a href="#option2" data-icon="arrow-l" class="ui-btn-right" style="margin-top: 15px;"><span> More</span></a>
+	</div>
+
+<!-- close header -->
+
+<!-- panel -->
+	<div data-role="panel" id="option2" data-display="overlay" data-position="right">
+	
+		<div data-role="controlgroup">
+			<a href="#login" data-role="button" data-icon="user" data-theme="b">My Storage</a>
+			<a href="#signup" data-role="button" data-icon="grid" data-theme="b">Location</a>
+		</div>
+
+		<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+
+		
+			<button data-rel="close" data-icon="delete" data-theme="b">Close</button>
+	
+	</div>
+
+<!-- close panel -->
+
+
+
+<!-- My dropdown -->
+    <div data-role="popup" id="mainnavpanel2" data-theme="b" data-arrow="t">
+        <ul data-role="listview">
+
+            <li>
+            	<a href="#glucose" class="ui-btn" data-transition="none">Glucose range level</a>
+            </li>
+
+            <li>
+            	<a href="#bmi" class="ui-btn" data-transition="none">Bmi Calculator</a>
+            </li>
+
+            <li>
+            	<a href="#mealplan" class="ui-btn" data-transition="none">Diabetic Meal plan</a>
+            </li>
+
+            <li>
+            	<a href="#exercise" class="ui-btn" data-icon="recycle" data-transition="none">Exercise plan</a>
+            </li>
+
+            <li>
+            	<a href="#quiz" class="ui-btn" data-icon="edit" data-transition="none">Quiz</a>
+            </li>
+
+            <li>
+            	<a href="#aboutus" class="ui-btn" data-icon="check" data-transition="none">About us</a>
+            </li>
+
+
+        </ul>
+    </div>
+
+<!-- close dropdown -->
+
+
+
+<!-- navbar -->
+
+	<div data-role="navbar"  data-iconpos="left">
+		<ul>
+			<li><a href="#home" data-icon="home"  data-theme="b">Home</a></li>
+			<li><a href="#info" data-icon="plus" data-theme="b">Info</a></li>
+			<li><a href="#mainnavpanel2" class="ui-btn-active ui-state-persist" data-icon="carat-d" data-rel="popup" data-theme="b">Services</a></li>
+	<!--	<li><a href="#" data-icon="edit" data-theme="b">Quiz</a></li> -->
+ 		</ul>
+	</div>
+
+<!-- close navbar -->
+
+
+<!-- main -->
+		<div data-role="main" class="ui-content" data-theme="b">
+		
+			<h2 class="title1" style="text-align: center; margin-bottom: 40px;">Normal sugar Level</h2><br>
+
+
+			<!-- Non-Diabetic - Normal Blood Glucose Range -->
+
+
+				<details id="myDetails">
+					<summary style="text-align: center;">
+						<span id="#nondiabetic" class="change">Non-Diabetic - Normal Blood Glucose Range</span>
+					</summary><br>
+
+
+				<!--After meal test -->
+				<strong >If your glucose test was at least 90min <span style="text-decoration: underline;">after</span> your meal</strong>
+
+				<input type="text" name="num1" id="num1" placeholder="Please enter your Value"><br>
+
+				<strong>Unit on glucometer : </strong><select name="unit1" id="unit1" data-theme="b">
+					<option value="mmol1">Mmol/L</option>
+					<option value="mgdl1">Mg/dL</option>
+					
+				</select>
+
+
+				<p id="result1"  style="color: ;"></p>
+				 <!--<input type="text" name="result" id="result" data-role="button">-->
+
+				<a href="#" id="btnCal1" data-role="button" data-theme="b">Calculate</a>
+				<input type="reset" name="reset" onclick="myReload()" value="Reset" data-role="button" data-theme="b">
+
+
+				<!--close After meal test -->
+
+
+
+
+
+				<!-- before meal test -->
+
+
+
+
+
+				<br><br>
+				<strong>If your glucose test was <span style="text-decoration: underline;">before</span> your meal</strong>
+
+				<input type="text" name="num2" id="num2" placeholder="Please enter your Value"><br>
+
+				<strong>Unit on glucometer : </strong><select name="unit2" id="unit2" data-theme="b">
+					<option value="mmol2">Mmol/L</option>
+					<option value="mgdl2">Mg/dL</option>
+					
+				</select>
+
+
+				 <p id="result2"  style="color: ;"></p>
+				 <!--<input type="text" name="result" id="result" data-role="button">-->
+
+				<a href="#" id="btnCal2" data-role="button" data-theme="b">Calculate</a>
+				<input type="reset" onclick="myReload()" name="reset" value="Reset" data-role="button" data-theme="b">
+
+
+
+
+
+				<!-- close before meal test -->
+
+
+	
+							
+					
+					
+
+				</details>	
+
+
+
+
+
+
+
+
+				<!-- Diabetic - Normal Blood Glucose Range -->
+
+
+
+				<details id="myDetails" style="margin-top: 33px; margin-bottom: 33px;">
+					<summary style="text-align: center;">
+						<span id="adultdiabetic"  class="change">Diabetic - Normal Blood Glucose Range </span>
+					</summary><br>	
+
+
+
+
+				<!--After meal test -->
+				<strong>If your glucose test was at least 90min <span style="text-decoration: underline;">after</span> your meal</strong>
+
+				<input type="text" name="num3" id="num3" placeholder="Please enter your Value"><br>
+
+				<strong>Unit on glucometer : </strong><select name="unit3" id="unit3" data-theme="b">
+					<option value="mmol3">Mmol/L</option>
+					<option value="mgdl3">Mg/dL</option>
+					
+				</select>
+
+
+				 <p id="result3"  style="color: ;"></p>
+				 <!--<input type="text" name="result" id="result" data-role="button">-->
+
+				<a href="#" id="btnCal3" data-role="button" data-theme="b">Calculate</a>
+				<input type="reset" onclick="myReload()" name="reset" value="Reset"    data-role="button" data-theme="b">
+
+
+				<!--close After meal test -->
+				
+
+
+
+				<!-- before meal test -->
+
+
+
+
+				<br><br>
+				<strong>If your glucose test was <span style="text-decoration: underline;">before</span> your meal</strong>
+
+				<input type="text" name="num4" id="num4" placeholder="Please enter your Value"><br>
+
+				<strong>Unit on glucometer : </strong><select name="unit4" id="unit4" data-theme="b">
+					<option value="mmol4">Mmol/L</option>
+					<option value="mgdl4">Mg/dL</option>
+					
+				</select>
+
+
+				 <p id="result4"  style="color: ;"></p>
+				 <!--<input type="text" name="result" id="result" data-role="button">-->
+
+				<a href="#" id="btnCal4" data-role="button" data-theme="b">Calculate</a>
+				<input type="reset" onclick="myReload()" name="reset" value="Reset" data-role="button" data-theme="b">
+
+
+
+
+
+				<!-- close before meal test -->
+
+
+
+
+
+
+
+					
+
+				</details>	
+
+
+
+
+
+
+
+
+
+
+
+				<details id="myDetails">
+					<summary id="childrendiabetic" style="text-align: center;">
+						<span class="change">Children With Diabetes (12 years or less) Normal Blood Glucose Range</span>
+					</summary><br>	
+
+
+
+
+
+
+
+
+				<!--After meal test -->
+				<strong>If the glucose test was at least 90min <span style="text-decoration: underline;">after</span> meal</strong>
+
+				<input type="text" name="num5" id="num5" placeholder="Please enter your Value"><br>
+
+				<strong>Unit on glucometer : </strong><select name="unit5" id="unit5" data-theme="b">
+					<option value="mmol5">Mmol/L</option>
+					<option value="mgdl5">Mg/dL</option>
+					
+				</select>
+
+
+				 <p id="result5"  style="color: ;"></p>
+				 <!--<input type="text" name="result" id="result" data-role="button">-->
+
+				<a href="#" id="btnCal5" data-role="button" data-theme="b">Calculate</a>
+				<input type="reset" onclick="myReload()" name="reset" value="Reset" data-role="button" data-theme="b">
+
+
+				<!--close After meal test -->
+				
+
+
+
+				<!-- before meal test -->
+
+
+
+
+
+<br><br>				<strong>If the glucose test was <span style="text-decoration: underline;">before</span> meal</strong>
+
+				<input type="text" name="num6" id="num6" placeholder="Please enter your Value"><br>
+
+				<strong>Unit on glucometer : </strong><select name="unit6" id="unit6" data-theme="b">
+					<option value="mmol6">Mmol/L</option>
+					<option value="mgdl6">Mg/dL</option>
+					
+				</select>
+
+
+				 <p id="result6"  style="color: ;"></p>
+				 <!--<input type="text" name="result" id="result" data-role="button">-->
+
+				<a href="#" id="btnCal6" data-role="button" data-theme="b">Calculate</a>
+				<input type="reset" onclick="myReload()" name="reset" value="Reset" data-role="button" data-theme="b">
+
+
+
+
+
+				<!-- close before meal test -->
+
+					
+					
+
+				</details>	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		</div>
+
+<!--close div main -->
+		
+
+	<!--	<a href="#pagetwo" data-transition="fade"  class="ui-btn">Page two</a> -->
+
+
+<!-- footer -->
+	<div data-role="footer" data-position="fixed" style="background-color: black;">
+		<p style="font-family: Times; text-align: center;margin: 8px;">&copy; Copyright | Beat Diabetes</p>
+	</div>
+<!-- close footer -->
+
+
+</div> <!-- close glucose page -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- bmi page-->
+
+	<div data-role="page" id="bmi" >
+
+	
+<!-- header -->
+	<div data-role="header" id="MainPageheader3" data-position="fixed" data-tap-toggle="false" data-fullscreen="false" data-theme="b" style="height: 70px;">
+			<img src="images/ab.png" style="padding-top: 22px; padding-left: 15px;" width="180" height="32">
+		<a href="#option3" data-icon="arrow-l" class="ui-btn-right" style="margin-top: 15px;"><span> More</span></a>
+	</div>
+
+<!-- close header -->
+
+<!-- panel -->
+	<div data-role="panel" id="option3" data-display="overlay" data-position="right">
+	
+		<div data-role="controlgroup">
+			<a href="#login" data-role="button" data-icon="user" data-theme="b">My Storage</a>
+			<a href="#signup" data-role="button" data-icon="grid" data-theme="b">Location</a>
+		</div>
+
+		<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+
+		
+			<button data-rel="close" data-icon="delete" data-theme="b">Close</button>
+	
+	</div>
+
+<!-- close panel -->
+
+
+
+<!-- My dropdown -->
+    <div data-role="popup" id="mainnavpanel3" data-theme="b" data-arrow="t">
+        <ul data-role="listview">
+
+            <li>
+            	<a href="#glucose" class="ui-btn" data-transition="none">Glucose range level</a>
+            </li>
+
+            <li>
+            	<a href="#bmi" class="ui-btn" data-transition="none">Bmi Calculator</a>
+            </li>
+
+            <li>
+            	<a href="#mealplan" class="ui-btn" data-transition="none">Diabetic Meal plan</a>
+            </li>
+
+            <li>
+            	<a href="#exercise" class="ui-btn" data-icon="recycle" data-transition="none">Exercise plan</a>
+            </li>
+
+            <li>
+            	<a href="#quiz" class="ui-btn" data-icon="edit" data-transition="none">Quiz</a>
+            </li>
+
+            <li>
+            	<a href="#aboutus" class="ui-btn" data-icon="check" data-transition="none">About us</a>
+            </li>
+
+
+        </ul>
+    </div>
+
+<!-- close dropdown -->
+
+
+
+<!-- navbar -->
+
+	<div data-role="navbar"  data-iconpos="left">
+		<ul>
+			<li><a href="#home" data-icon="home"  data-theme="b">Home</a></li>
+			<li><a href="#info" data-icon="plus" data-theme="b">Info</a></li>
+			<li><a href="#mainnavpanel3" class="ui-btn-active ui-state-persist" data-icon="carat-d" data-rel="popup" data-theme="b">Services</a></li>
+	<!--	<li><a href="#" data-icon="edit" data-theme="b">Quiz</a></li> -->
+ 		</ul>
+	</div>
+
+<!-- close navbar -->
+
+
+<!-- main -->
+		<div data-role="main" class="ui-content" data-theme="b">
+		
+
+			<!-- Calculate your Body Mass Index -->
+			<h2 class="title1">Know your Body mass index (BMI)</h2>
+
+			<form>
+				
+
+
+				<input type="text" name="weight" id="weight" placeholder="Enter your weight (Kg)"><br>
+				<input type="text" name="height" id="height" placeholder="Enter your height (cm)"><br>
+
+
+				 <p id="bmiresult"  style="color: ;"></p>
+
+				 <!--<input type="text" name="result" id="result" data-role="button">-->
+
+				<a href="#" id="bmiCal" data-role="button" data-theme="b">Calculate</a>
+				<input type="reset" onclick="myReload()" name="reset" value="Reset" data-role="button" data-theme="b">
+
+
+
+			</form>
+
+		</div>
+
+<!--close div main -->
+		
+
+	<!--	<a href="#pagetwo" data-transition="fade"  class="ui-btn">Page two</a> -->
+
+
+<!-- footer -->
+	<div data-role="footer" data-position="fixed" style="background-color: black;">
+		<p style="font-family: Times; text-align: center;margin: 8px;">&copy; Copyright | Beat Diabetes</p>
+	</div>
+<!-- close footer -->
+
+
+</div> <!-- close bmi page -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- meal plan page-->
+
+	<div data-role="page" id="mealplan" >
+
+	
+<!-- header -->
+	<div data-role="header" id="MainPageheader4" data-position="fixed" data-tap-toggle="false" data-fullscreen="false" data-theme="b" style="height: 70px;">
+			<img src="images/ab.png" style="padding-top: 22px; padding-left: 15px;" width="180" height="32">
+		<a href="#option4" data-icon="arrow-l" class="ui-btn-right" style="margin-top: 15px;"><span> More</span></a>
+	</div>
+
+<!-- close header -->
+
+<!-- panel -->
+	<div data-role="panel" id="option4" data-display="overlay" data-position="right">
+	
+		<div data-role="controlgroup">
+			<a href="#login" data-role="button" data-icon="user" data-theme="b">My Storage</a>
+			<a href="#signup" data-role="button" data-icon="grid" data-theme="b">Location</a>
+		</div>
+
+		<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+
+		
+			<button data-rel="close" data-icon="delete" data-theme="b">Close</button>
+	
+	</div>
+
+<!-- close panel -->
+
+
+
+<!-- My dropdown -->
+    <div data-role="popup" id="mainnavpanel4" data-theme="b" data-arrow="t">
+        <ul data-role="listview">
+
+            <li>
+            	<a href="#glucose" class="ui-btn" data-transition="none">Glucose range level</a>
+            </li>
+
+            <li>
+            	<a href="#bmi" class="ui-btn" data-transition="none">Bmi Calculator</a>
+            </li>
+
+            <li>
+            	<a href="#mealplan" class="ui-btn" data-transition="none">Diabetic Meal plan</a>
+            </li>
+
+            <li>
+            	<a href="#exercise" class="ui-btn" data-icon="recycle" data-transition="none">Exercise plan</a>
+            </li>
+
+            <li>
+            	<a href="#quiz" class="ui-btn" data-icon="edit" data-transition="none">Quiz</a>
+            </li>
+
+            <li>
+            	<a href="#aboutus" class="ui-btn" data-icon="check" data-transition="none">About us</a>
+            </li>
+
+
+        </ul>
+    </div>
+
+<!-- close dropdown -->
+
+
+
+<!-- navbar -->
+
+	<div data-role="navbar"  data-iconpos="left">
+		<ul>
+			<li><a href="#home" data-icon="home"  data-theme="b">Home</a></li>
+			<li><a href="#info" data-icon="plus" data-theme="b">Info</a></li>
+			<li><a href="#mainnavpanel4" class="ui-btn-active ui-state-persist" data-icon="carat-d" data-rel="popup" data-theme="b">Services</a></li>
+	<!--	<li><a href="#" data-icon="edit" data-theme="b">Quiz</a></li> -->
+ 		</ul>
+	</div>
+
+<!-- close navbar -->
+
+
+<!-- main -->
+		<div data-role="main" class="ui-content" data-theme="b">
+		
+		<p class="title1"> Meal plan </p>
+
+	<p>The simple meals and snacks for a 7-day plan are featured. The carbohydrates are balanced throughout the day with each meal.</p>
+
+	<p>Eating with diabetes doesn't need to be difficult—choose. With this meal plan, adding in daily exercise for a healthy and sustainable approach to managing diabetes.</p>
+	
+	<img src="images/meal1.jpg" width="80%" style="margin-left: 10%;margin-right: 10%;">
+
+
+
+	<h2>Day 1</h2>
+
+	<img src="images/day1.jpg" width="80%" style="margin-left: 10%;margin-right: 10%;">
+
+
+
+
+	<h3>Breakfast (294 calories, 41 g carbohydrates)</h3>
+	
+	<p>• 1/2 cup oats cooked in 1/2 cup each 2% milk and water</p>
+	<p>• 1 medium plum, chopped</p>
+	<p>• 4 walnut halves, choppe</p>
+
+
+
+	<h3>Lunch (319 calories, 37 g carbohydrates)</h3>
+
+	<p>Turkey &amp; Apple Cheddar Melt</p>
+	<p>• 2 slices whole-wheat bread</p>
+	<p>• 2 tsp. whole-grain mustard, divided</p>
+	<p>• 1/2 medium apple, sliced</p>
+	<p>• 2 oz. low-sodium deli turkey</p>
+	<p>• 2 Tbsp. shredded Cheddar cheese, divided</p>
+	<p>• 1 cup mixed greens</p>
+
+
+
+	<h3>Dinner (417 calories, 54 g carbohydrates)</h3>
+	<p>• 2 1/2 cups Vegetable Weight-Loss Soup</p>
+	<p>• 1 serving Rosemary-Goat Cheese Toast</p>
+
+
+	<h2>Day 2</h2>
+
+	<img src="images/day2.jpg" width="80%" style="margin-left: 10%;margin-right: 10%;">
+
+
+			<h3>Breakfast (297 calories, 33 g carbohydrates)</h3>
+		<p>• 1 serving Everything Bagel Avocado Toast</p>
+		<p>• 1/2 cup blueberries</p>
+		<p>• 25 pistachios</p>
+
+
+
+		<h3>Lunch (314 calories, 47 g carbohydrates)</h3>
+		<p>• 1 3/4 cups Vegetable Weight-Loss Soup</p>
+		<p>• 2 slices whole-wheat baguette (cut ¼ inch thick)</p>
+
+
+
+		<h3>Dinner (420 calories, 48 g carbohydrates)</h3>
+		<p>• 2 1/2 cups Lentil &amp; Roasted Vegetable Salad with Green Goddess Dressing</p>
+		<p>• 1 serving Frozen Chocolate-Banana Bites, to enjoy after dinner</p>
+
+	<img src="images/day3.jpg" width="80%" style="margin-left: 10%;margin-right: 10%;">
+
+		<h3>Breakfast (289 calories, 27 g carbohydrates)</h3>
+		<p>• 1 serving Yogurt with Blueberries &amp; Honey</p>
+		<p>• 1 tsp. ground flaxseed</p>
+		<p>• 6 walnut halves, chopped or whole</p>
+		<p>Add flaxseed to yogurt for an added boost of fiber and omega-3s. Top with chopped walnuts, or leave the walnuts whole to have on the side.</p>
+
+
+
+		<h3>Lunch (347 calories, 48 g carbohydrates)</h3>
+		<p>• 3 1/2 cups Mixed Greens with Lentils &amp; Sliced Apple</p>
+
+
+		<h3>Dinner (490 calories, 52 g carbohydrates)</h3>
+		<p>• 1 1/3 cups Chicken Sausage &amp; Peppers</p>
+		<p>• 1/2 cup cooked brown rice</p>
+		<p>• 1/2 tsp. extra-virgin olive oil</p>
+		<p>• 1/2 tsp. no-salt-added Italian seasoning</p>
+		<p>• Salt to taste</p>
+		<p>Season rice with oil, Italian seasoning and salt. Serve chicken, sausage &amp; peppers over the rice.</p>
+
+		<p>• 1 1/2 cups mixed greens</p>
+		<p>• 1/4 cup shredded carrot</p>
+		<p>• 1/4 cup sliced cucumbers</p>
+		<p>• 1 Tbsp. Garlic-Oregano Vinaigrette, or a premade Italian salad dressing*</p>
+		<p>Combine greens, carrot, cucumber and vinaigrette.</p>
+
+	<img src="images/day4.jpg" width="80%" style="margin-left: 10%;margin-right: 10%;">
+
+		<h3>Breakfast (295 calories, 42 g carbohydrates)</h3>
+		<p>• 1/2 cup oats cooked in 1/2 cup each 2% milk and water</p>
+		<p>• 1 tsp. ground flaxseed</p>
+		<p>• 1 medium plum, chopped</p>
+		<p>• 3 walnut halves, chopped</p>
+		<p>Mix oatmeal and flaxseed; top with plum and walnuts.</p>
+
+
+
+		<h3>Lunch (350 calories, 46 g carbohydrates)</h3>
+		<p>• 1 serving Veggie &amp; Hummus Sandwich</p>
+		<p>• 3 dried apricots</p>
+
+
+
+		<h3>Dinner (450 calories, 41 g carbohydrates)</h3>
+		<p>• 1 serving Lemon-Herb Salmon with Caponata & Farro*</p>
+
+		<p>*Don't have farro? You can substitute another whole grain you have on hand, like brown rice.</p>
+
+	<img src="images/day5.jpg" width="80%" style="margin-left: 10%;margin-right: 10%;">
+
+			<h3>Breakfast (276 calories, 44 g carbohydrates)</h3>
+		<p>• 1 serving Everything Bagel Avocado Toast<p>
+		<p>• 20 cherries<p>
+
+
+
+		<h3>Lunch (350 calories, 41 g carbohydrates)</h3>
+		<p>Turkey &amp; Pear Pita Melt<p>
+		<p>• 1/2 large whole-wheat pita round (save the other half for lunch on Day 7)<p>
+		<p>• 3 1/2 oz. low-sodium deli turkey<p>
+		<p>• 1/2 medium pear, sliced<p>
+		<p>• 2 Tbsp. shredded Cheddar cheese<p>
+		<p> 1 cup mixed greens<p>
+		<p>Stuff pita pocket with turkey, pear and cheese. Toast in a toaster oven until the cheese starts to melt. Add greens to the pita just before eating.<p>
+
+		<p>• 1 medium plum<p>
+
+
+
+		<h3>Dinner (448 calories, 38 g carbohydrates)</h3>
+		<p>• 1 serving Spaghetti Squash & Meatballs<p>
+		<p>• 1 slice whole-wheat baguette (cut 1/4 inch thick), toasted<p>
+		<p>• 1/2 Tbsp. goat cheese<p>
+		<p>• 1/4 tsp. fresh chopped rosemary<p>
+		<p>Toast baguette and top with cheese and rosemary.</p>
+
+	<img src="images/day6.jpg" width="80%" style="margin-left: 10%;margin-right: 10%;">
+
+		<h3>Breakfast (291 calories, 28 g carbohydrates)</h3>
+		<p>• 1 serving Yogurt with Blueberries & Honey</p>
+		<p>• 2 tsp. ground flaxseed</p>
+		<p>• 5 walnut halves, chopped</p>
+		<p>Mix yogurt and flaxseed. Serve topped with walnuts.</p>
+
+
+
+		<h3>Lunch (337 calories, 42 g carbohydrates)</h3>
+		<p>• 2 1/2 cups Vegetable Weight-Loss Soup</p>
+
+
+
+		<h3>• 1 serving Apple-Glazed Chicken with Spinach</h3>
+		<p>• 1/2 cup Steamed Butternut Squash</p>
+		<p>• 2 tsp. extra-virgin olive oil</p>
+		<p>• 1/2 tsp. fresh thyme or 1/8 tsp. dried</p><
+		<p>• Salt and pepper to taste</p>
+		<p>Toss squash with oil and thyme. Season with salt and pepper to taste.</p>
+
+	<img src="images/day7.jpg" width="80%" style="margin-left: 10%;margin-right: 10%;">
+
+		<h3>Breakfast (300 calories, 40 g carbohydrates)</h3>
+		<p>• 2 Blueberry-Pecan Pancakes</p>
+		<p>• 3 Tbsp. blueberries, fresh or frozen</p>
+		<p>• 2 tsp. ground flaxseed</p>
+		<p>Microwave blueberries until soft and sauce-like, about 1 minute. Stir in the flaxseed for an extra fiber kick, and serve with the pancakes.</p>
+
+
+
+		<h3>Lunch (325 calories, 35 g carbohydrates)</h3>
+		<p>• 2 cups mixed greens</p>
+		<p>• 1/2 cup sliced cucumber</p>
+		<p>• 1/4 cup grated carrot</p>
+		<p>• 1 1/2 Tbsp. Garlic-Oregano Vinaigrette, or a premade Italian salad dressing</p>
+		<p>Combine greens, cucumber, carrot and vinaigrette.</p>
+
+		<p>• 1/2 large whole-wheat pita round, toasted</p>
+		<p>• 1/4 cup hummus</p>
+
+
+
+		<h3>Dinner (444 calories, 48 g carbohydrates)</h3>
+		<p>• 1 serving Mushroom-Sauced Pork Chops</p>
+		<p>• 1/2 cup cooked brown rice</p>
+		<p>• 3/4 cup Roasted Brussels Sprouts with Sun-Dried Tomato Pesto</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		</div>
+
+<!--close div main -->
+		
+
+	<!--	<a href="#pagetwo" data-transition="fade"  class="ui-btn">Page two</a> -->
+
+
+<!-- footer -->
+	<div data-role="footer" data-position="fixed" style="background-color: black;">
+		<p style="font-family: Times; text-align: center;margin: 8px;">&copy; Copyright | Beat Diabetes</p>
+	</div>
+<!-- close footer -->
+
+
+</div> <!-- close mealplan page -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- exercise page-->
+
+	<div data-role="page" id="exercise" >
+
+	
+<!-- header -->
+	<div data-role="header" id="MainPageheader5" data-position="fixed" data-tap-toggle="false" data-fullscreen="false" data-theme="b" style="height: 70px;">
+			<img src="images/ab.png" style="padding-top: 22px; padding-left: 15px;" width="180" height="32">
+		<a href="#option5" data-icon="arrow-l" class="ui-btn-right" style="margin-top: 15px;"><span> More</span></a>
+	</div>
+
+<!-- close header -->
+
+<!-- panel -->
+	<div data-role="panel" id="option5" data-display="overlay" data-position="right">
+	
+		<div data-role="controlgroup">
+			<a href="#login" data-role="button" data-icon="user" data-theme="b">My Storage</a>
+			<a href="#signup" data-role="button" data-icon="grid" data-theme="b">Location</a>
+		</div>
+
+		<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+
+		
+			<button data-rel="close" data-icon="delete" data-theme="b">Close</button>
+	
+	</div>
+
+<!-- close panel -->
+
+
+
+<!-- My dropdown -->
+    <div data-role="popup" id="mainnavpanel5" data-theme="b" data-arrow="t">
+        <ul data-role="listview">
+
+            <li>
+            	<a href="#glucose" class="ui-btn" data-transition="none">Glucose range level</a>
+            </li>
+
+            <li>
+            	<a href="#bmi" class="ui-btn" data-transition="none">Bmi Calculator</a>
+            </li>
+
+            <li>
+            	<a href="#mealplan" class="ui-btn" data-transition="none">Diabetic Meal plan</a>
+            </li>
+
+            <li>
+            	<a href="#exercise" class="ui-btn" data-icon="recycle" data-transition="none">Exercise plan</a>
+            </li>
+
+            <li>
+            	<a href="#quiz" class="ui-btn" data-icon="edit" data-transition="none">Quiz</a>
+            </li>
+
+            <li>
+            	<a href="#aboutus" class="ui-btn" data-icon="check" data-transition="none">About us</a>
+            </li>
+
+
+        </ul>
+    </div>
+
+<!-- close dropdown -->
+
+
+
+<!-- navbar -->
+
+	<div data-role="navbar"  data-iconpos="left">
+		<ul>
+			<li><a href="#home" data-icon="home"  data-theme="b">Home</a></li>
+			<li><a href="#info" data-icon="plus" data-theme="b">Info</a></li>
+			<li><a href="#mainnavpanel5" class="ui-btn-active ui-state-persist" data-icon="carat-d" data-rel="popup" data-theme="b">Services</a></li>
+	<!--	<li><a href="#" data-icon="edit" data-theme="b">Quiz</a></li> -->
+ 		</ul>
+	</div>
+
+<!-- close navbar -->
+
+
+<!-- main -->
+		<div data-role="main" class="ui-content" data-theme="b">
+		
+			<p class="title">Exercise plan</p>
+			<p>As daily physical activities is essential, we referenced some exercise videos where everyone can refer for their daily exercises.. </p>
+
+			<img src="images/laetitia.jpg" width="70%" style="margin-right: 15%;margin-left: 15%">
+
+			<!-- 30mins beginners exercise-->
+			<a href="#popupVideo1" data-rel="popup" data-position-to="window" class="ui-btn ui-corner-all ui-shadow ui-btn-inline">Launch Beginners Exercise video </a>
+			<div data-role="popup" id="popupVideo1" data-overlay-theme="b" data-theme="a" data-tolerance="15,15" class="ui-content">
+			 <iframe width="560" height="315" src="https://www.youtube.com/embed/Gze8oMuj4as" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+			</div>
+
+
+<!--
+
+			
+			<a href="#popupVideo2" data-rel="popup" data-position-to="window" class="ui-btn ui-corner-all ui-shadow ui-btn-inline">Launch Yoga Exercise video </a>
+			<div data-role="popup" id="popupVideo2" data-overlay-theme="b" data-theme="a" data-tolerance="15,15" class="ui-content">
+			 <iframe width="560" height="315" src="https://www.youtube.com/watch?v=v7AYKMP6rOE" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+			</div>
+
+
+			<a href="#popupVideo" data-rel="popup" data-position-to="window" class="ui-btn ui-corner-all ui-shadow ui-btn-inline">Launch Full Body Workout video </a>
+			<div data-role="popup" id="popupVide3" data-overlay-theme="b" data-theme="a" data-tolerance="15,15" class="ui-content">
+			 <iframe width="560" height="315" src="https://www.youtube.com/embed/UBMk30rjy0o" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+			</div>
+-->
+
+
+
+
+		</div>
+
+<!--close div main -->
+		
+
+	<!--	<a href="#pagetwo" data-transition="fade"  class="ui-btn">Page two</a> -->
+
+
+<!-- footer -->
+	<div data-role="footer" data-position="fixed" style="background-color: black;">
+		<p style="font-family: Times; text-align: center;margin: 8px; ">&copy; Copyright | Beat Diabetes</p>
+	</div>
+<!-- close footer -->
+
+
+</div> <!-- close exercise page -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- quiz page-->
+
+	<div data-role="page" id="quiz" >
+
+	
+<!-- header -->
+	<div data-role="header" id="MainPageheader6" data-position="fixed" data-tap-toggle="false" data-fullscreen="false" data-theme="b" style="height: 70px;">
+			<img src="images/ab.png" style="padding-top: 22px; padding-left: 15px;" width="180" height="32">
+		<a href="#option6" data-icon="arrow-l" class="ui-btn-right" style="margin-top: 15px;"><span> More</span></a>
+	</div>
+
+<!-- close header -->
+
+<!-- panel -->
+	<div data-role="panel" id="option6" data-display="overlay" data-position="right">
+	
+		<div data-role="controlgroup">
+			<a href="#login" data-role="button" data-icon="user" data-theme="b">My Storage</a>
+			<a href="#signup" data-role="button" data-icon="grid" data-theme="b">Location</a>
+		</div>
+
+		<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+
+		
+			<button data-rel="close" data-icon="delete" data-theme="b">Close</button>
+	
+	</div>
+
+<!-- close panel -->
+
+
+
+<!-- My dropdown -->
+    <div data-role="popup" id="mainnavpanel6" data-theme="b" data-arrow="t">
+        <ul data-role="listview">
+
+            <li>
+            	<a href="#glucose" class="ui-btn" data-transition="none">Glucose range level</a>
+            </li>
+
+            <li>
+            	<a href="#bmi" class="ui-btn" data-transition="none">Bmi Calculator</a>
+            </li>
+
+            <li>
+            	<a href="#mealplan" class="ui-btn" data-transition="none">Diabetic Meal plan</a>
+            </li>
+
+            <li>
+            	<a href="#exercise" class="ui-btn" data-icon="recycle" data-transition="none">Exercise plan</a>
+            </li>
+
+            <li>
+            	<a href="#quiz" class="ui-btn" data-icon="edit" data-transition="none">Quiz</a>
+            </li>
+
+            <li>
+            	<a href="#aboutus" class="ui-btn" data-icon="check" data-transition="none">About us</a>
+            </li>
+
+
+        </ul>
+    </div>
+
+<!-- close dropdown -->
+
+
+
+<!-- navbar -->
+
+	<div data-role="navbar"  data-iconpos="left">
+		<ul>
+			<li><a href="#home" data-icon="home"  data-theme="b">Home</a></li>
+			<li><a href="#info" data-icon="plus" data-theme="b">Info</a></li>
+			<li><a href="#mainnavpanel6" class="ui-btn-active ui-state-persist" data-icon="carat-d" data-rel="popup" data-theme="b">Services</a></li>
+	<!--	<li><a href="#" data-icon="edit" data-theme="b">Quiz</a></li> -->
+ 		</ul>
+	</div>
+
+<!-- close navbar -->
+
+
+<!-- main -->
+		<div data-role="main" class="ui-content" data-theme="b">
+		
+			<h2 class="title">Quiz page</h2>
+
+
+			<form>
+				
+				<strong>Most people with Diabetes can feel their sugar getting high...</strong><br><br>
+
+				
+				<input type="radio" name="sugar" value="true" id="true" checked="checked">
+				<label for="true">True</label>
+
+				<input type="radio" name="sugar" id="false" value="false" >
+				<label for="false">False</label>
+
+
+				<a href="#" id="btnQuiz" data-role="button" class="ui-btn ui-shadow ui-corner-all ui-icon-carat-r ui-btn-icon-right" data-icon="carat-r" >Result</a>
+
+				<p id="quizans"  style="color: ;"></p>
+
+
+
+
+				<br><br>
+				
+
+
+				<strong>People with diabetes can eat as many fruits as they want.</strong><br><br>
+
+				
+				<input type="radio" name="fruits" value="true1" id="true1" checked="checked">
+				<label for="true1">True</label>
+
+				<input type="radio" name="fruits" id="false1" value="false1" >
+				<label for="false1">False</label>
+
+
+				<a href="#" id="btnQuiz1" data-role="button" class="ui-btn ui-shadow ui-corner-all ui-icon-carat-r ui-btn-icon-right" data-icon="carat-r" >Result</a>
+
+				<p id="quizans1"  style="color: ;"></p>
+
+
+
+
+
+
+
+				<br><br>
+				
+
+
+				<strong>People with diabetes should not eat candy or other sugary foods.</strong><br><br>
+
+				
+				<input type="radio" name="candy" value="true2" id="true2" checked="checked">
+				<label for="true2">True</label>
+
+				<input type="radio" name="candy" id="false2" value="false2" >
+				<label for="false2">False</label>
+
+
+				<a href="#" id="btnQuiz2" data-role="button" class="ui-btn ui-shadow ui-corner-all ui-icon-carat-r ui-btn-icon-right" data-icon="carat-r" >Result</a>
+
+				<p id="quizans2"  style="color: ;"></p>
+
+
+
+				<br><br>
+				
+
+
+				<strong>Its dangerous for women with diabetes to get pregnant.</strong><br><br>
+
+				
+				<input type="radio" name="pregnant" value="true3" id="true3" checked="checked">
+				<label for="true3">True</label>
+
+				<input type="radio" name="pregnant" id="false3" value="false3" >
+				<label for="false3">False</label>
+
+
+				<a href="#" id="btnQuiz3" data-role="button" class="ui-btn ui-shadow ui-corner-all ui-icon-carat-r ui-btn-icon-right" data-icon="carat-r" >Result</a>
+
+				<p id="quizans3"  style="color: ;"></p>
+
+
+
+
+			</form>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		</div>
+
+<!--close div main -->
+		
+
+	<!--	<a href="#pagetwo" data-transition="fade"  class="ui-btn">Page two</a> -->
+
+
+<!-- footer -->
+	<div data-role="footer" data-position="fixed" style="background-color: black;">
+		<p style="font-family: Times; text-align: center;margin: 8px;">&copy; Copyright | Beat Diabetes</p>
+	</div>
+<!-- close footer -->
+
+
+</div> <!-- close quiz page -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- aboutus page-->
+
+	<div data-role="page" id="aboutus" >
+
+	
+<!-- header -->
+	<div data-role="header" id="MainPageheader7" data-position="fixed" data-tap-toggle="false" data-fullscreen="false" data-theme="b" style="height: 70px;">
+			<img src="images/ab.png" style="padding-top: 22px; padding-left: 15px;" width="180" height="32">
+		<a href="#option7" data-icon="arrow-l" class="ui-btn-right" style="margin-top: 15px;"><span> More</span></a>
+	</div>
+
+<!-- close header -->
+
+<!-- panel -->
+	<div data-role="panel" id="option7" data-display="overlay" data-position="right">
+	
+		<div data-role="controlgroup">
+			<a href="#login" data-role="button" data-icon="user" data-theme="b">My Storage</a>
+			<a href="#signup" data-role="button" data-icon="grid" data-theme="b"> Location</a>
+		</div>
+
+		<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+
+		
+			<button data-rel="close" data-icon="delete" data-theme="b">Close</button>
+	
+	</div>
+
+<!-- close panel -->
+
+
+
+<!-- My dropdown -->
+    <div data-role="popup" id="mainnavpanel7" data-theme="b" data-arrow="t">
+        <ul data-role="listview">
+
+            <li>
+            	<a href="#glucose" class="ui-btn" data-transition="none">Glucose range level</a>
+            </li>
+
+            <li>
+            	<a href="#bmi" class="ui-btn" data-transition="none">Bmi Calculator</a>
+            </li>
+
+            <li>
+            	<a href="#mealplan" class="ui-btn" data-transition="none">Diabetic Meal plan</a>
+            </li>
+
+            <li>
+            	<a href="#exercise" class="ui-btn" data-icon="recycle" data-transition="none">Exercise plan</a>
+            </li>
+
+            <li>
+            	<a href="#quiz" class="ui-btn" data-icon="edit" data-transition="none">Quiz</a>
+            </li>
+
+            <li>
+            	<a href="#aboutus" class="ui-btn" data-icon="check" data-transition="none">About us</a>
+            </li>
+
+
+        </ul>
+    </div>
+
+<!-- close dropdown -->
+
+
+
+<!-- navbar -->
+
+	<div data-role="navbar"  data-iconpos="left">
+		<ul>
+			<li><a href="#home" data-icon="home"  data-theme="b">Home</a></li>
+			<li><a href="#info" data-icon="plus" data-theme="b">Info</a></li>
+			<li><a href="#mainnavpanel7" class="ui-btn-active ui-state-persist" data-icon="carat-d" data-rel="popup" data-theme="b">Services</a></li>
+	<!--	<li><a href="#" data-icon="edit" data-theme="b">Quiz</a></li> -->
+ 		</ul>
+	</div>
+
+<!-- close navbar -->
+
+
+<!-- main -->
+		<div data-role="main" class="ui-content" data-theme="b">
+		
+	<p class="title">About us </p>
+
+
+	<img src="images/about.png" width="100%" height="130" >
+
+
+	<p style="line-height: 1.6;" class="myLineHeight">Due to alarming statistics found in recent studies by Ministry of health, that nearly 25% of Mauritians suffer from the Disease of Diabetes.</p>
+
+	<p style="line-height: 1.6;" class="myLineHeight">Beat Diabetes is an application aim to create Awareness, and sensiticing individuals about the disease of Diabetes.
+	Targeting both Non-Diabetic, Diabetic people, both Adults &amp; Children, providing them a set of functionalities &amp; information addressing different problems individually.</p>
+
+	<p style="line-height: 1.6;" class="myLineHeight">The app was developed by two second year students of University of Technology, Mauritius.</p><br>
+
+	<p>Name: Hansley Chammun </p>
+	<p>	Contact on: hchammun@gmail.com</p>
+	<img src="images/hans.jpg" width="70%" style="margin-left: 15%;margin-left: 15%;"><br><br>
+
+
+	<p>Name: Chetna Bauhadoor</p> 
+	<p> Contact on: chetanb54@gmail.com</p>
+	<img src="images/chetna.jpg" width="70%" style="margin-left: 15%;margin-left: 15%;">
+		</div>
+
+<!--close div main -->
+		
+
+	<!--	<a href="#pagetwo" data-transition="fade"  class="ui-btn">Page two</a> -->
+
+
+<!-- footer -->
+	<div data-role="footer" data-position="fixed" style="background-color: black;">
+		<p style="font-family: Times; text-align: center;margin: 8px;">&copy; Copyright | Beat Diabetes</p>
+	</div>
+<!-- close footer -->
+
+
+</div> <!-- close aboutus page -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- login page-->
+
+	<div data-role="page" id="login" >
+
+	
+<!-- header -->
+	<div data-role="header" id="MainPageheader8" data-position="fixed" data-tap-toggle="false" data-fullscreen="false" data-theme="b" style="height: 70px;">
+			<img src="images/ab.png" style="padding-top: 22px; padding-left: 15px;" width="180" height="32">
+		<a href="#option8" data-icon="arrow-l" class="ui-btn-right ui-btn-active ui-state-persist" style="margin-top: 15px;"><span> More</span></a>
+	</div>
+
+<!-- close header -->
+
+<!-- panel -->
+	<div data-role="panel" id="option8" data-display="overlay" data-position="right">
+	
+		<div data-role="controlgroup">
+			<a href="#login" data-role="button" data-icon="user" data-theme="b">My Storage</a>
+			<a href="#signup" data-role="button" data-icon="grid" data-theme="b">Location</a>
+		</div>
+
+		<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+
+		
+			<button data-rel="close" data-icon="delete" data-theme="b">Close</button>
+	
+	</div>
+
+<!-- close panel -->
+
+
+
+<!-- My dropdown -->
+    <div data-role="popup" id="mainnavpanel8" data-theme="b" data-arrow="t">
+        <ul data-role="listview">
+
+            <li>
+            	<a href="#glucose" class="ui-btn" data-transition="none">Glucose range level</a>
+            </li>
+
+            <li>
+            	<a href="#bmi" class="ui-btn" data-transition="none">Bmi Calculator</a>
+            </li>
+
+            <li>
+            	<a href="#mealplan" class="ui-btn" data-transition="none">Diabetic Meal plan</a>
+            </li>
+
+            <li>
+            	<a href="#exercise" class="ui-btn" data-icon="recycle" data-transition="none">Exercise plan</a>
+            </li>
+
+            <li>
+            	<a href="#quiz" class="ui-btn" data-icon="edit" data-transition="none">Quiz</a>
+            </li>
+
+            <li>
+            	<a href="#aboutus" class="ui-btn" data-icon="check" data-transition="none">About us</a>
+            </li>
+
+
+        </ul>
+    </div>
+
+<!-- close dropdown -->
+
+
+
+<!-- navbar -->
+
+	<div data-role="navbar"  data-iconpos="left">
+		<ul>
+			<li><a href="#home" data-icon="home"  data-theme="b">Home</a></li>
+			<li><a href="#info" data-icon="plus" data-theme="b">Info</a></li>
+			<li><a href="#mainnavpanel8"  data-icon="carat-d" data-rel="popup" data-theme="b">Services</a></li>
+	<!--	<li><a href="#" data-icon="edit" data-theme="b">Quiz</a></li> -->
+ 		</ul>
+	</div>
+
+<!-- close navbar -->
+
+
+<!-- main -->
+		<div data-role="main" class="ui-content" data-theme="b">
+		
+	
+
+
+
+		
+			<p class="title1"><legend>Insert Your Gluco value</legend></p>
+
+	<!--		<input type="text" id="inpKey" placeholder="Enter key"> -->
+
+			<input type="text" id="inpValue" placeholder="Ex: 9.12 Mmol/L After meal"><br>
+
+			<br>
+			<button type="button" id="btnInsert" >Record value</button>
+
+			<button type="button" id="btnClear" >Clear all</button>
+
+
+
+
+
+		
+
+
+
+		<fieldset>
+			<legend></legend>
+			<p class="title1">Storage output</p>
+
+		
+		<p id="isOutput"></p>
+
+		</fieldset>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		</div>
+
+<!--close div main -->
+		
+
+	<!--	<a href="#pagetwo" data-transition="fade"  class="ui-btn">Page two</a> -->
+
+
+<!-- footer -->
+	<div data-role="footer" data-position="fixed" style="background-color: black;">
+		<p style="font-family: Times; text-align: center;margin: 8px;">&copy; Copyright | Beat Diabetes</p>
+	</div>
+<!-- close footer -->
+
+
+</div> <!-- close login page -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- signup page-->
+
+	<div data-role="page" id="signup" >
+
+	
+<!-- header -->
+	<div data-role="header" id="MainPageheader9" data-position="fixed" data-tap-toggle="false" data-fullscreen="false" data-theme="b" style="height: 70px;">
+			<img src="images/ab.png" style="padding-top: 22px; padding-left: 15px;" width="180" height="32">
+		<a href="#option9" data-icon="arrow-l" class="ui-btn-right ui-btn-active ui-state-persist" class="" 
+		style="margin-top: 15px;"><span> More</span></a>
+	</div>
+
+<!-- close header -->
+
+<!-- panel -->
+	<div data-role="panel" id="option9" data-display="overlay" data-position="right">
+	
+		<div data-role="controlgroup">
+			<a href="#login" data-role="button" data-icon="user" data-theme="b">My Storage
+			</a>
+			<a href="#signup" data-role="button"  data-icon="grid" data-theme="b">Location</a>
+		</div>
+
+		<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+
+		
+			<button data-rel="close" data-icon="delete" data-theme="b">Close</button>
+	
+	</div>
+
+<!-- close panel -->
+
+
+
+<!-- My dropdown -->
+    <div data-role="popup" id="mainnavpanel9" data-theme="b" data-arrow="t">
+        <ul data-role="listview">
+
+            <li>
+            	<a href="#glucose" class="ui-btn" data-transition="none">Glucose range level</a>
+            </li>
+
+            <li>
+            	<a href="#bmi" class="ui-btn" data-transition="none">Bmi Calculator</a>
+            </li>
+
+            <li>
+            	<a href="#mealplan" class="ui-btn" data-transition="none">Diabetic Meal plan</a>
+            </li>
+
+            <li>
+            	<a href="#exercise" class="ui-btn" data-icon="recycle" data-transition="none">Exercise plan</a>
+            </li>
+
+            <li>
+            	<a href="#quiz" class="ui-btn" data-icon="edit" data-transition="none">Quiz</a>
+            </li>
+
+            <li>
+            	<a href="#aboutus" class="ui-btn" data-icon="check" data-transition="none">About us</a>
+            </li>
+
+
+        </ul>
+    </div>
+
+<!-- close dropdown -->
+
+
+
+<!-- navbar -->
+
+	<div data-role="navbar"  data-iconpos="left">
+		<ul>
+			<li><a href="#home" data-icon="home"  data-theme="b">Home</a></li>
+			<li><a href="#info" data-icon="plus" data-theme="b">Info</a></li>
+			<li><a href="#mainnavpanel9"  data-icon="carat-d" data-rel="popup" data-theme="b">Services</a></li>
+	<!--	<li><a href="#" data-icon="edit" data-theme="b">Quiz</a></li> -->
+ 		</ul>
+	</div>
+
+<!-- close navbar -->
+
+
+<!-- main -->
+		<div data-role="main" class="ui-content" data-theme="b">
+		
+	<p class="title1">Location</p>
+
+
+
+	<div id="mapid" style="width: 290px; height: 400px;"></div>
+
+
+
+
+
+
+
+
+		</div>
+
+<!--close div main -->
+		
+
+	<!--	<a href="#pagetwo" data-transition="fade"  class="ui-btn">Page two</a> -->
+
+
+<!-- footer -->
+	<div data-role="footer" data-position="fixed" style="background-color: black;">
+		<p style="font-family: Times; text-align: center;margin: 8px;">&copy; Copyright | Beat Diabetes</p>
+	</div>
+<!-- close footer -->
+
+
+</div> <!-- close signup page -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript">
+	
+	//const inpKey = document.getElementById("inpKey");
+	var d = new Date();
+	const inpValue = document.getElementById("inpValue");
+
+	const btnInsert = document.getElementById("btnInsert");
+	const isOutput = document.getElementById("isOutput");
+
+	btnInsert.onclick = function(){
+
+		const key = d;
+
+		
+		const value = inpValue.value;
+
+
+
+
+		if(key && value){
+
+			localStorage.setItem(key,value);
+			location.reload();
+		}
+
+	};
+
+	for(let i = 0; i< localStorage.length; i++){
+
+		const key = localStorage.key(i);
+		const value = localStorage.getItem(key);
+
+
+
+		//isOutput.innerHTML += key+value+"<br/>";
+		isOutput.innerHTML += "Date : "+`${key} `+ "<br/> <br/>"+"Glucose Test Record : "+`${value}`+"<br/><hr><br/>";
+
+	}
+
+
+		btnClear.onclick = function(){
+			localStorage.clear();
+			location.reload();
+
+	
+	};
+
+
+
+document.getElementById("myDetails").addEventListener("toggle");
+
+
+	
+</script>
+
+
+</body>
+</html>

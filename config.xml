@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<widget xmlns = "http://www.w3.org/ns/widgets"
+	xmlns:gap = "http://phonegap.com/ns/1.0"
+	id = "com.gs.calc"
+	versionCode ="1"
+	version="1.0.0" >
+
+	<!-- Version code is optional and android only-->
+
+	<name> Beat Diabetes</name>
+
+	<description> Aim to provide awareness &amp; sencitising people about the decease in Mauritius.</description>
+
+	<author href="https://build.phonegap.com" email="hchammun@gmail.com">Hansley Chammun</author>
+
+	<preference name="android-build-tool" value="gradle" />
+	
+    <preference name="android-targetSdkVersion" value="21" />
+	<plugin name="cordova-plugin-geolocation" source="npm" spec="~2.1.0" />
+	<plugin name="cordova-plugin-camera" source="npm" spec="~2.1.0" />
+
+
+
+
+
+	<platform name="android">
+        <icon   src="images/icon.jpg"               density="ldpi" />
+        <icon   src="images/icon.jpg"               density="mdpi" />
+        <icon   src="images/icon.jpg"               density="hdpi" />
+        <icon   src="images/icon.jpg"             density="xhdpi" />
+        <icon   src="images/icon.jpg"             density="xxhdpi" />
+        <icon   src="images/icon.jpg"           density="xxxhdpi" />
+    </platform>
+
+
+
+
+	</widget>
